@@ -3,6 +3,8 @@
 namespace Matchish\ScoutElasticSearch\ElasticSearch\Config;
 
 /**
+ * @method static user()
+ * @method static password()
  * @method static array hosts()
  */
 class Config

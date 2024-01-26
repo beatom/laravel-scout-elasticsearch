@@ -19,7 +19,13 @@ final class ElasticSearchServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__.'/../config/elasticsearch.php', 'elasticsearch');
 
         $this->app->bind(Client::class, function () {
-            return ClientBuilder::create()->setHosts(Config::hosts())->build();
+            $clientBuilder = ClientBuilder::create()->setHosts(Config::hosts());
+
+            if ($user = Config::user()) {
+                $clientBuilder->setBasicAuthentication($user, Config::password());
+            }
+
+            return $clientBuilder->build();
         });
 
         $this->app->bind(

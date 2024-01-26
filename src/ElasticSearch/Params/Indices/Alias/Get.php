@@ -41,6 +41,8 @@ final class Get
 
     public static function anyIndex(string $alias): Get
     {
-        return new static($alias, '*');
+        $prefix = config('scout.prefix', '');
+
+        return new static($alias, $prefix.'*');
     }
 }
